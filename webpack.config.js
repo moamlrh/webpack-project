@@ -13,6 +13,10 @@ module.exports = (env) => {
     mode: isDevelopment ? "development" : "production",
     devtool: isDevelopment ? "eval" : "source-map",
     target: isDevelopment ? "web" : "browserslist",
+    output: {
+      path: join("build"),
+      assetModuleFilename: "images/[hash][ext][query]", // all imgs in iamges dir
+    },
     devServer: {
       contentBase: join("dist"),
       open: true,
@@ -21,20 +25,17 @@ module.exports = (env) => {
     module: {
       rules: [
         {
+          test: /\.(png|jpg|jpeg|gif|svg)/,
+          type: "asset/resource",
+        },
+        {
           test: /\.(js|jsx)$/i,
           exclude: /node_modules/,
           use: ["babel-loader"],
-          resolve: {
-            extensions: [".js", ".jsx"],
-          },
         },
         {
           test: /\.(css|sass|scss)$/i, // to check all files css tyeps
           use: [MiniCssExtractPuglins.loader, "css-loader", "sass-loader"],
-        },
-        {
-          test: /\.(png|jpg|jpeg|svg)/i,
-          use: "url-loader",
         },
       ],
     },
@@ -49,6 +50,9 @@ module.exports = (env) => {
       }),
       new webpack.HotModuleReplacementPlugin(),
     ],
+    resolve: {
+      extensions: [".js", ".jsx", ".css", ".scss"],
+    },
   };
   console.log("the mode is  ==>> ", config.mode);
   return config;
