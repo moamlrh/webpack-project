@@ -26,7 +26,12 @@ module.exports = (env) => {
       rules: [
         {
           test: /\.(png|jpg|jpeg|gif|svg)/,
-          type: "asset/resource",
+          type: "asset", //  asset/inline or asset/resource
+          // parser: {
+          //   dataUrlCondition: {
+          //     maxSize: 30 * 1024,
+          //   },
+          // },
         },
         {
           test: /\.(js|jsx)$/i,
