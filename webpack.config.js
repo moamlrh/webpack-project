@@ -23,6 +23,6 @@ module.exports = (env) => {
       ],
     },
   };
-
+  console.log(config.mode);
   return config;
 };
