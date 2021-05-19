@@ -14,17 +14,19 @@ module.exports = (env) => {
     devtool: isDevelopment ? "eval" : "source-map",
     target: isDevelopment ? "web" : "browserslist",
     devServer: {
-      contentBase: join("src"),
+      contentBase: join("dist"),
       open: true,
       hot: true,
     },
     module: {
       rules: [
         {
-          test: /\.js$/i,
-          include: join("src"),
+          test: /\.(js|jsx)$/i,
           exclude: /node_modules/,
           use: ["babel-loader"],
+          resolve: {
+            extensions: [".js", ".jsx"],
+          },
         },
         {
           test: /\.(css|sass|scss)$/i, // to check all files css tyeps
@@ -39,7 +41,7 @@ module.exports = (env) => {
     plugins: [
       new HtmlWebapckPlugin({
         inject: "body",
-        title: "Webpack project",
+        title: "HtmlWebapckPlugin",
         template: join("src", "index.html"),
       }),
       new MiniCssExtractPuglins({
