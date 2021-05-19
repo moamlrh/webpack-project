@@ -1,4 +1,6 @@
 import "./styles.css";
+import "./styles.scss";
+import image from "./image.jpg";
 
 const button = document.createElement("button");
 button.innerText = "click me";
@@ -6,5 +8,9 @@ button.innerText = "click me";
 const input = document.createElement("input");
 input.type = "text";
 
+const img = new Image(); //37kb
+img.src = image;
+
+document.body.appendChild(img);
 document.body.appendChild(input);
 document.body.appendChild(button);
