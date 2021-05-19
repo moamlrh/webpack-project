@@ -1,20 +1,10 @@
-// go ahead
-const x = () => console.log("x");
-const c = () => console.log("c");
+import "./styles.css";
 
-x();
-c();
+const button = document.createElement("button");
+button.innerText = "click me";
 
-const a = {
-  a: "1",
-  b: "31",
-  c: 12,
-};
+const input = document.createElement("input");
+input.type = "text";
 
-const b = {
-  ...a,
-  b: "2",
-};
-
-console.log(a);
-console.log(b);
+document.body.appendChild(input);
+document.body.appendChild(button);
