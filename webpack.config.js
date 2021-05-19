@@ -7,7 +7,7 @@ module.exports = (env) => {
   const isProduction = env.mode === "production";
   const config = {
     mode: isDevelopment ? "development" : "production",
-    devtool: "source-map",
+    devtool: isDevelopment ? "eval" : "source-map",
     devServer: {
       contentBase: join("dist"),
       open: true,
