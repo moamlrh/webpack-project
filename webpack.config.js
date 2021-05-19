@@ -1,13 +1,12 @@
 const path = require("path");
 
 const join = (...paths) => path.join(__dirname, ...paths);
-let mode = "development";
-
-if (process.env.NODE_ENV === "production") mode = "production";
 
 module.exports = (env) => {
+  const isDevelopment = env.mode === "development";
+  const isProduction = env.mode === "production";
   const config = {
-    mode,
+    mode: isDevelopment ? "development" : "production",
     devtool: "source-map",
     devServer: {
       contentBase: join("dist"),
