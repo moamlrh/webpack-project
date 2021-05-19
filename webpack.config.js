@@ -3,6 +3,8 @@ const MiniCssExtractPuglins = require("mini-css-extract-plugin");
 const HtmlWebapckPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ReactRefresh = require("@pmmmwh/react-refresh-webpack-plugin");
+const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const join = (...paths) => path.join(__dirname, ...paths);
 
@@ -14,6 +16,7 @@ module.exports = (env) => {
     mode: isDevelopment ? "development" : "production",
     devtool: isDevelopment ? "eval" : "source-map",
     target: isDevelopment ? "web" : "browserslist",
+    entry: join("src/index.js"),
     output: {
       path: join("build"),
       assetModuleFilename: "images/[hash][ext][query]", // all imgs in iamges dir
@@ -56,6 +59,7 @@ module.exports = (env) => {
         filename: "name.css",
       }),
       new webpack.HotModuleReplacementPlugin(),
+      new ReactRefreshPlugin(),
     ],
     resolve: {
       extensions: [".js", ".jsx"],
