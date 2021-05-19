@@ -8,7 +8,7 @@ button.innerText = "click me";
 const input = document.createElement("input");
 input.type = "text";
 
-const img = new Image(); //37kb
+const img = new Image(); // 37kb
 img.src = image;
 
 document.body.appendChild(img);

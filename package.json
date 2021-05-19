@@ -8,7 +8,9 @@
     "start": "webpack serve -- --env mode=development",
     "watch": "webpack --watch",
     "dev": "webpack -- --env mode=development",
-    "build": "webpack -- --env  mode=production"
+    "build": "webpack -- --env  mode=production",
+    "lint": "eslint --ext js,jsx src",
+    "lint:fix": "eslint --ext js,jsx src --fix"
   },
   "repository": {
     "type": "git",
@@ -26,8 +28,12 @@
     "@babel/preset-env": "^7.14.2",
     "babel-loader": "^8.2.2",
     "css-loader": "^5.2.4",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.2",
     "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "4.14.1",
+    "prettier": "^2.3.0",
     "sass-loader": "^11.1.1",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1",
