@@ -52,7 +52,7 @@ module.exports = (env) => {
       new HtmlWebapckPlugin({
         inject: "body",
         title: "HtmlWebapckPlugin",
-        template: join("src", "index.html"),
+        template: join("public", "index.html"),
       }),
       new MiniCssExtractPuglins({
         filename: "name.css",
