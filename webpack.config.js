@@ -1,30 +1,21 @@
 const path = require("path");
 const MiniCssExtractPuglins = require("mini-css-extract-plugin");
 const HtmlWebapckPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const ReactRefresh = require("@pmmmwh/react-refresh-webpack-plugin");
-const ReactRefreshPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
-
 const join = (...paths) => path.join(__dirname, ...paths);
+const devConfig = require("./webpack.dev");
+const prodConfig = require("./webpack.prod");
+const { default: merge } = require("webpack-merge");
 
 module.exports = (env) => {
   const isDevelopment = env.mode === "development";
   const isProduction = env.mode === "production";
 
   const config = {
-    mode: isDevelopment ? "development" : "production",
-    devtool: isDevelopment ? "eval" : "source-map",
-    target: isDevelopment ? "web" : "browserslist",
-    entry: join("src/index.js"),
+    entry: join("src", "index.js"),
     output: {
       path: join("build"),
       assetModuleFilename: "images/[hash][ext][query]", // all imgs in iamges dir
-    },
-    devServer: {
-      contentBase: join("dist"),
-      open: true,
-      hot: true,
     },
     module: {
       rules: [
@@ -40,7 +31,15 @@ module.exports = (env) => {
         {
           test: /\.(js|jsx)$/i,
           exclude: /node_modules/,
-          use: ["babel-loader"],
+          use: [
+            {
+              loader: "babel-loader",
+              options: {
+                // presets: ["@babel/preset-env", "@babel/preset-react"],
+                plugins: [isDevelopment ? "react-refresh/babel" : []],
+              },
+            },
+          ],
         },
         {
           test: /\.(css|sass|scss)$/i, // to check all files css tyeps
@@ -58,13 +57,14 @@ module.exports = (env) => {
       new MiniCssExtractPuglins({
         filename: "name.css",
       }),
-      new webpack.HotModuleReplacementPlugin(),
-      new ReactRefreshPlugin(),
     ],
     resolve: {
       extensions: [".js", ".jsx"],
     },
   };
-  console.log("the mode is  ==>> ", config.mode);
-  return config;
+  return merge(
+    config,
+    isDevelopment && devConfig(),
+    isProduction && prodConfig()
+  );
 };
