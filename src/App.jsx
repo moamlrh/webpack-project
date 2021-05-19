@@ -7,7 +7,7 @@ const D = () => {
 function App() {
   return (
     <h1>
-      Ohhh my god <D></D>
+      This is project created by webpack and reactjs
       <img src={image} />
     </h1>
   );

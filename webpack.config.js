@@ -2,6 +2,7 @@ const path = require("path");
 const MiniCssExtractPuglins = require("mini-css-extract-plugin");
 const HtmlWebapckPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const join = (...paths) => path.join(__dirname, ...paths);
 
@@ -45,6 +46,7 @@ module.exports = (env) => {
       ],
     },
     plugins: [
+      new CleanWebpackPlugin({}),
       new HtmlWebapckPlugin({
         inject: "body",
         title: "HtmlWebapckPlugin",
@@ -56,7 +58,7 @@ module.exports = (env) => {
       new webpack.HotModuleReplacementPlugin(),
     ],
     resolve: {
-      extensions: [".js", ".jsx", ".css", ".scss"],
+      extensions: [".js", ".jsx"],
     },
   };
   console.log("the mode is  ==>> ", config.mode);
